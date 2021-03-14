@@ -1,10 +1,3 @@
-//ajouter un évènement clic => check
-//le clic dans une case ajoute un symbole croix ou rond => check
-//lorsque qu'une case possède un symbole, on ne peut plus cliquer dedans => check
-//lorsqu'un symbole est ajouté, le prochain clic dans une autre case ajoute un symbole différent du précédent =>check
-//après chaque ajout de symbole, à compter du cinquième tour vérifier si une condition de victoire est remplie => check
-//si une condition de victoire est remplie, figer le jeu et empêcher de continuer à jouer à moins de redémarrer une partie => check
-//proposer de redémarrer une partie => check
 
 // j'initie toutes les variables dont j'aurais besoin
 function init(playerToBegin){
@@ -33,7 +26,7 @@ let winCase = {
     cond_eight :[2,4,6]
 }
 init("cross")
-
+console.log(tour%2+1)
 // en bouclant sur la liste des cases, j'ajoute un évènement SI la case est vide
 for (let element of cases){
     element.addEventListener("click", Event =>{
@@ -46,12 +39,13 @@ for (let element of cases){
                 let pos = winCase[pattern]
                 if(arr[pos[0]].classList.contains(current) && arr[pos[1]].classList.contains(current) && arr[pos[2]].classList.contains(current)){
                    // je met un alerte pour déclarer la victoire et passer la variable de victoire à "true"
-                    alert("Victoire  pour le joueur " + ((tour%2)+1) + " !")
                     victory = true
-                    if((tour%2+1) == 1){
+                    if(current == "cross"){
                         score_j1.innerHTML++
+                        alert("Victoire pour le joueur 1 !")
                     }else{
                         score_j2.innerHTML++
+                        alert("Victoire pour le joueur 2 !")
                     }
                 }
             }
@@ -59,7 +53,7 @@ for (let element of cases){
             // je rajoute une condition permettant au perdant de commencer
             current = (current == "cross") ? "circle" : "cross"
             // je met en place une règle permettant de mettre une couleur au joueur qui doit jouer
-            document.querySelector("#"+current).classList.toggle("activePlayer")
+            //document.querySelector("#"+current).classList.toggle("activePlayer")
             // si à la fin du tour 9 il n'y a toujours aucun vainqueur, on déclare le match nul
             if(tour>8 && victory == false){
                 alert("Match nul !")
@@ -73,8 +67,3 @@ let button = document.querySelector("#button")
 button.addEventListener("click", Event =>{
        init(current)
 })
-
-// OPTIONNEL
-//afficher un message de victoire/fin de partie => check
-//ajouter un système de score =>
-//afficher c'est à quel joueur de jouer

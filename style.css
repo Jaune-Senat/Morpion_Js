@@ -29,7 +29,6 @@ img{
     align-items: center;
     justify-content: space-around;
     margin : auto;
-    border: 3px solid #000;
     width: 80%;
 }
 
@@ -40,9 +39,9 @@ img{
     flex-wrap: wrap;
 }
 
-.activePlayer{
+/*.activePlayer{
     background-color: red;
-}
+}*/
 
 .cell{
     width: 200px;
