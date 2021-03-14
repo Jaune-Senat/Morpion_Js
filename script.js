@@ -1,7 +1,7 @@
 
 // j'initie toutes les variables dont j'aurais besoin
 function init(playerToBegin){
-    victory = false
+    game_over = false
     tour = 0
     current = playerToBegin
     document.querySelector("#"+current).classList.toggle("activePlayer")
@@ -14,7 +14,7 @@ function init(playerToBegin){
     }
 }
 // je stocke la liste des cases, le nombre de tour, et un tableau des symboles dans des variables
-let tour, victory, symbole, cases, score_j1, score_j2, current
+let tour, game_over, symbole, cases, score_j1, score_j2, current
 let winCase = {
     cond_one :[0,1,2],
     cond_two :[3,4,5],
@@ -31,7 +31,7 @@ console.log(tour%2+1)
 for (let element of cases){
     element.addEventListener("click", Event =>{
         // si la case est vide, je place un symbole en fonction du tour de jeu
-        if(element.classList.length == 1 && !victory){        
+        if(element.classList.length == 1 && !game_over){        
             element.classList.add(current)
             let arr = Array.from(cases)
             // je parcours un tableau de condition de victoires et je compare avec les cases remplies
@@ -39,7 +39,7 @@ for (let element of cases){
                 let pos = winCase[pattern]
                 if(arr[pos[0]].classList.contains(current) && arr[pos[1]].classList.contains(current) && arr[pos[2]].classList.contains(current)){
                    // je met un alerte pour déclarer la victoire et passer la variable de victoire à "true"
-                    victory = true
+                    game_over = true
                     if(current == "cross"){
                         score_j1.innerHTML++
                         alert("Victoire pour le joueur 1 !")
@@ -55,9 +55,9 @@ for (let element of cases){
             // je met en place une règle permettant de mettre une couleur au joueur qui doit jouer
             //document.querySelector("#"+current).classList.toggle("activePlayer")
             // si à la fin du tour 9 il n'y a toujours aucun vainqueur, on déclare le match nul
-            if(tour>8 && victory == false){
+            if(tour>8 && game_over == false){
                 alert("Match nul !")
-                victory = true
+                game_over = true
             }
         }
     })
